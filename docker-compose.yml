@@ -1,0 +1,28 @@
+services:
+
+  hotels:
+    image: b4rbatos/hotels:latest
+    mem_limit: 800m
+    ports:
+      - "8080:8080"
+    networks:
+      - b4rbatos-network
+
+  rooms:
+    image: b4rbatos/rooms:latest
+    mem_limit: 800m
+    ports:
+      - "8081:8081"
+    networks:
+      - b4rbatos-network
+
+  reservations:
+    image: b4rbatos/reservations:latest
+    mem_limit: 800m
+    ports:
+      - "8082:8082"
+    networks:
+      - b4rbatos-network
+
+networks:
+  b4rbatos-network:
