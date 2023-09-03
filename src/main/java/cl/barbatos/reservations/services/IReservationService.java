@@ -1,8 +1,8 @@
-package com.aleal.reservations.services;
+package cl.barbatos.reservations.services;
 
 import java.util.List;
 
-import com.aleal.reservations.model.Reservation;
+import cl.barbatos.reservations.model.Reservation;
 
 
 public interface IReservationService {

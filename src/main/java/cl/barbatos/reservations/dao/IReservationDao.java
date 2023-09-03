@@ -1,8 +1,8 @@
-package com.aleal.reservations.dao;
+package cl.barbatos.reservations.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.aleal.reservations.model.Reservation;
+import cl.barbatos.reservations.model.Reservation;
 
 public interface IReservationDao extends CrudRepository<Reservation, Long>{
 

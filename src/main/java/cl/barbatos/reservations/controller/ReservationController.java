@@ -1,18 +1,17 @@
-package com.aleal.reservations.controller;
+package cl.barbatos.reservations.controller;
 
 import java.util.List;
 
-import com.aleal.reservations.config.ReservationsServiceConfig;
-import com.aleal.reservations.model.PropertiesReservations;
+import cl.barbatos.reservations.config.ReservationsServiceConfig;
+import cl.barbatos.reservations.model.Reservation;
+import cl.barbatos.reservations.services.IReservationService;
+import cl.barbatos.reservations.model.PropertiesReservations;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.aleal.reservations.model.Reservation;
-import com.aleal.reservations.services.IReservationService;
 
 @RestController
 public class ReservationController {

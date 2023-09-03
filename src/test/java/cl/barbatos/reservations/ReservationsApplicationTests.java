@@ -1,4 +1,4 @@
-package com.aleal.reservations;
+package cl.barbatos.reservations;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

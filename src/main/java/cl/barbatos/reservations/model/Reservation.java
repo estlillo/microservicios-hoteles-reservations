@@ -1,4 +1,4 @@
-package com.aleal.reservations.model;
+package cl.barbatos.reservations.model;
 
 import java.sql.Date;
 

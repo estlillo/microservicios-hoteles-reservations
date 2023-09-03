@@ -1,12 +1,11 @@
-package com.aleal.reservations.services;
+package cl.barbatos.reservations.services;
 
 import java.util.List;
 
+import cl.barbatos.reservations.dao.IReservationDao;
+import cl.barbatos.reservations.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.aleal.reservations.dao.IReservationDao;
-import com.aleal.reservations.model.Reservation;
 
 @Service
 public class ReservationServiceImpl implements IReservationService {

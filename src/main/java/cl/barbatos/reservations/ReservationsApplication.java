@@ -1,4 +1,4 @@
-package com.aleal.reservations;
+package cl.barbatos.reservations;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
