@@ -1,0 +1,69 @@
+services:
+
+  configserver:
+    image: b4rbatos/configserver:latest
+    mem_limit: 800m
+    ports:
+      - "8085:8085"
+    networks:
+      - b4rbatos-network
+
+  hotels:
+    image: b4rbatos/hotels:0.0.2-SNAPSHOT
+    mem_limit: 800m
+    ports:
+      - "8080:8080"
+    networks:
+      - b4rbatos-network
+    depends_on:
+      - configserver
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_CONFIG_IMPORT=configserver:http://configserver:8085
+
+  rooms:
+    image: b4rbatos/rooms:0.0.2-SNAPSHOT
+    mem_limit: 800m
+    ports:
+      - "8081:8081"
+    networks:
+      - b4rbatos-network
+    depends_on:
+      - configserver
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_CONFIG_IMPORT=configserver:http://configserver:8085
+
+  reservations:
+    image: b4rbatos/reservations:0.0.2-SNAPSHOT
+    mem_limit: 800m
+    ports:
+      - "8082:8082"
+    networks:
+      - b4rbatos-network
+    depends_on:
+      - configserver
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_CONFIG_IMPORT=configserver:http://configserver:8085
+
+networks:
+  b4rbatos-network:
