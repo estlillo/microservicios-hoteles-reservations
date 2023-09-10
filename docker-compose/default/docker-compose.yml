@@ -8,8 +8,27 @@ services:
     networks:
       - b4rbatos-network
 
+  eureka:
+    image: b4rbatos/eureka:0.0.1-SNAPSHOT
+    mem_limit: 800m
+    ports:
+      - "8065:8065"
+    networks:
+      - b4rbatos-network
+    depends_on:
+      - configserver
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_CONFIG_IMPORT=configserver:http://configserver:8085
+
   hotels:
-    image: b4rbatos/hotels:0.0.2-SNAPSHOT
+    image: b4rbatos/hotels:0.0.3-SNAPSHOT
     mem_limit: 800m
     ports:
       - "8080:8080"
@@ -17,6 +36,7 @@ services:
       - b4rbatos-network
     depends_on:
         - configserver
+        - eureka
     deploy:
       restart_policy:
         condition: on-failure
@@ -26,9 +46,10 @@ services:
     environment:
         - SPRING_PROFILES_ACTIVE=default
         - SPRING_CONFIG_IMPORT=configserver:http://configserver:8085
+        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8065/eureka/
 
   rooms:
-    image: b4rbatos/rooms:0.0.2-SNAPSHOT
+    image: b4rbatos/rooms:0.0.3-SNAPSHOT
     mem_limit: 800m
     ports:
       - "8081:8081"
@@ -36,6 +57,7 @@ services:
       - b4rbatos-network
     depends_on:
       - configserver
+      - eureka
     deploy:
       restart_policy:
         condition: on-failure
@@ -45,9 +67,10 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=default
       - SPRING_CONFIG_IMPORT=configserver:http://configserver:8085
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8065/eureka/
 
   reservations:
-    image: b4rbatos/reservations:0.0.2-SNAPSHOT
+    image: b4rbatos/reservations:0.0.3-SNAPSHOT
     mem_limit: 800m
     ports:
       - "8082:8082"
@@ -55,6 +78,7 @@ services:
       - b4rbatos-network
     depends_on:
       - configserver
+      - eureka
     deploy:
       restart_policy:
         condition: on-failure
@@ -64,6 +88,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=default
       - SPRING_CONFIG_IMPORT=configserver:http://configserver:8085
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8065/eureka/
 
 networks:
   b4rbatos-network:
